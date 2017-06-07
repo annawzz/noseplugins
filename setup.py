@@ -17,7 +17,8 @@ setup(name='noseplugins',
       url='https://github.com/openprocurement/noseplugins',
       license='Apache License 2.0',
       zip_safe = False,
+      py_modules=['nose_todo_plugin']
       entry_points = {
-        'todo': [ 'todo = nose_todo_plugin:TodoWarningPlugin' ]
+        'nose.plugins.0.10': [ 'nose_todo_plugin = nose_todo_plugin:TodoWarningPlugin' ]
       },
      )
