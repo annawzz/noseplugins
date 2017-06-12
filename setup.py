@@ -19,6 +19,6 @@ setup(name='noseplugins',
       license='Apache License 2.0',
       zip_safe = False,
       entry_points = {
-        'todo': [ 'todo = nose_todo_plugin:TodoWarningPlugin' ]
+        'nose.plugins.0.10': [ 'todo = nose_todo_plugin:TodoWarningPlugin' ]
       },
      )
