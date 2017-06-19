@@ -8,10 +8,10 @@ If this test passes, a dot '.' will be in output.
 Example of using:
 
 ```python
-from nose_todo_plugin import warnTODO
+from nose_todo_plugin import warning
 ...
 
-    @warnTODO("reason of fail")
+    @warning("reason of fail")
     def test_empty_listing(self):
     ...
 ```
