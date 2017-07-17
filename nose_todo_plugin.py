@@ -6,6 +6,7 @@ as an error or failure.
 """
 import warnings
 from functools import wraps
+from webtest import AppError
 from nose.plugins.errorclass import ErrorClass, ErrorClassPlugin
 
 
@@ -34,7 +35,11 @@ class TodoWarningPlugin(ErrorClassPlugin):
         """ Customize formatError plugin method.
             Add error details to warnings list to be used in finslize method.
         """
-        self.warnings.append((err[1].reason, err[1].error))
+        try:
+            reason = (err[1].reason, err[1].error)
+        except AttributeError:
+            return err
+        self.warnings.append(reason)
         ec, ev, tb = err
         return (ec, ev, tb)
 
@@ -65,6 +70,8 @@ def warning(reason):
             except KeyboardInterrupt:
                 raise
             except AssertionError as e:
+                raise TodoWarningException(reason, e)
+            except AppError as e:
                 raise TodoWarningException(reason, e)
             except Exception:
                 raise
