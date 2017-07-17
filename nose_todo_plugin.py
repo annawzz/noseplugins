@@ -35,10 +35,9 @@ class TodoWarningPlugin(ErrorClassPlugin):
         """ Customize formatError plugin method.
             Add error details to warnings list to be used in finslize method.
         """
-        try:
-            reason = (err[1].reason, err[1].error)
-        except AttributeError:
+        if not isinstance(err[1], TodoWarningException):
             return err
+        reason = (err[1].reason, err[1].error)
         self.warnings.append(reason)
         ec, ev, tb = err
         return (ec, ev, tb)
